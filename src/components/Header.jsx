@@ -1,6 +1,5 @@
 import React from 'react';
-import fashion from '../assets/images/fashion.png';
-
+import { Link } from 'react-router-dom';
 function Header() {
   //   const mobileNav = document.querySelector('.mobile-nav');
   //   const navBtn = document.querySelector('.nav-btn');
@@ -11,22 +10,23 @@ function Header() {
 
   return (
     <>
-      <header className="wrapper bg-yellow-400  ">
+      <header className="wrapper ">
         <nav className="relative bg-slate-100 shadow-md p-5  flex justify-between items-center">
           <p className="font-bold text-2xl">StyleDrop</p>
           <div className="nav-menu space-x-10 md:flex hidden ">
-            <a href="catalogue" className="hover:underline ">
+            <Link to="/" className="hover:underline">
+              Home
+            </Link>
+
+            <a href="catalogue" className="hover:underline">
               Catalogue
             </a>
-            <a href="fashion" className="hover:underline">
-              Fashion
-            </a>
-            <a href="favourite" className="hover:underline">
-              Favourite
-            </a>
-            <a href="lifestyle" className="hover:underline">
-              Lifestyle
-            </a>
+            <Link to="/about" className="hover:underline">
+              About
+            </Link>
+            <Link to="/contact" className="hover:underline">
+              Contact
+            </Link>
           </div>
           <div className="space-x-4">
             <a
@@ -54,24 +54,6 @@ function Header() {
             </a>
           </div>
         </nav>
-        <div className=" flex flex-col md:flex-row justify-between items-center p-6">
-          <div>
-            <p className="text-4xl leading-loose font-bold">
-              LET'S EXPLORE{' '}
-              <span className="bg-white p-1 rounded-md">UNIQUE</span> CLOTHES
-            </p>
-            <p>Your style, redefined. Drop into it today!</p>
-            <div className="mt-10">
-              <a
-                href="shop"
-                className="bg-white hover:bg-slate-200 p-1 rounded-md  "
-              >
-                SHOP NOW
-              </a>
-            </div>
-          </div>
-          <img src={fashion} alt="Fashion" className="max-w-md " />
-        </div>
       </header>
     </>
   );

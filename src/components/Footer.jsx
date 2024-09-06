@@ -1,5 +1,5 @@
 import React from 'react';
-
+import '../assets/styles/style.css';
 function Footer() {
   return (
     <>
@@ -7,14 +7,14 @@ function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="font-bold text-2xl">StyleDrop</p>
           <div className="nav-menu space-x-10 md:flex hidden mt-4 md:mt-0">
-            <a href="catalogue" className="hover:underline">
-              Catalogue
-            </a>
-            <a href="buy" className="hover:underline">
-              Buy
+            <a href="fashion" className="hover:underline">
+              Fashion
             </a>
             <a href="favourite" className="hover:underline">
               Favourite
+            </a>
+            <a href="buy" className="hover:underline">
+              Buy
             </a>
             <a href="order" className="hover:underline">
               Order
@@ -28,10 +28,10 @@ function Footer() {
               SIGN UP
             </a>
             <a
-              href="contact"
+              href="login"
               className="bg-yellow-400 hover:bg-yellow-300 p-1 rounded-md "
             >
-              CONTACT
+              LOG IN
             </a>
           </div>
         </div>
