@@ -30,7 +30,9 @@ function Header() {
             <Link to="/products" className="hover:underline">
               Products
             </Link>
+            <div>{localStorage.length}Show</div>
           </div>
+
           <div className="space-x-4">
             <a
               href="signup"

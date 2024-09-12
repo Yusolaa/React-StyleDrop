@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from '../components/Hero';
 import Location from '../components/Location';
+
 // import RegForm from '../components/RegForm';
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
     <div>
       <Hero />
       <Location />
+
       {/* <RegForm /> */}
     </div>
   );
