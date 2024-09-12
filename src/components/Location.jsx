@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './Button';
+import FetchApi from './FetchApi';
 
 const Location = () => {
   return (
@@ -16,6 +17,7 @@ const Location = () => {
         referrerpolicy="no-referrer-when-downgrade"
       ></iframe>
       <Button title="Click" />
+      <FetchApi />
     </div>
   );
 };

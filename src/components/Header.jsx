@@ -27,6 +27,9 @@ function Header() {
             <Link to="/contact" className="hover:underline">
               Contact
             </Link>
+            <Link to="/products" className="hover:underline">
+              Products
+            </Link>
           </div>
           <div className="space-x-4">
             <a
