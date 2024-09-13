@@ -74,45 +74,61 @@ const Cart = () => {
         <p>Your cart is empty.</p>
       ) : (
         <div>
-          {cartItems.map((item) => (
-            <div
-              key={item.id}
-              className="flex items-center justify-between mb-5 border-b pb-4"
-            >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-32 h-32 object-contain"
-              />
-              <div className="flex-3 px-4">
-                <p className="font-semibold">{item.title}</p>
-                <p className="text-green-600">${item.price}</p>
-                <div className="flex items-center mt-2">
-                  <button
-                    onClick={() => decrementQuantity(item)}
-                    className="bg-red-500 text-white px-3 py-1 rounded-lg mr-2 hover:bg-red-400"
-                  >
-                    -
-                  </button>
-                  <span className="text-lg font-semibold">{item.quantity}</span>
-                  <button
-                    onClick={() => incrementQuantity(item)}
-                    className="bg-green-500 text-white px-3 py-1 rounded-lg ml-2 hover:bg-green-400"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-              <button
-                onClick={() => removeItem(item)}
-                className="bg-gray-300 text-gray-700 px-3 py-1 rounded-lg hover:bg-gray-200"
-              >
-                Remove
-              </button>
-            </div>
-          ))}
+          <table className="w-full text-left table-auto">
+            <thead>
+              <tr>
+                <th className="px-4 py-2">Image</th>
+                <th className="px-4 py-2">Title</th>
+                <th className="px-4 py-2">Price</th>
+                <th className="px-4 py-2">Quantity</th>
+                <th className="px-4 py-2">Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cartItems.map((item) => (
+                <tr key={item.id} className="border-t">
+                  <td className="px-4 py-2">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-24 h-24 object-contain"
+                    />
+                  </td>
+                  <td className="px-4 py-2">{item.title}</td>
+                  <td className="px-4 py-2 text-green-600">${item.price}</td>
+                  <td className="px-4 py-2">
+                    <div className="flex items-center">
+                      <button
+                        onClick={() => decrementQuantity(item)}
+                        className="bg-red-500 text-white px-3 py-1 rounded-lg mr-2 hover:bg-red-400"
+                      >
+                        -
+                      </button>
+                      <span className="text-lg font-semibold">
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() => incrementQuantity(item)}
+                        className="bg-green-500 text-white px-3 py-1 rounded-lg ml-2 hover:bg-green-400"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </td>
+                  <td className="px-4 py-2">
+                    <button
+                      onClick={() => removeItem(item)}
+                      className="bg-gray-300 text-gray-700 px-3 py-1 rounded-lg hover:bg-gray-200"
+                    >
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-          <div className="mt-6">
+          <div className="mt-6 text-right">
             <p className="text-xl font-bold">Total: ${totalPrice.toFixed(2)}</p>
             <button className="bg-yellow-500 text-white rounded-lg py-2 px-4 mt-4 hover:bg-yellow-400">
               Checkout
