@@ -39,7 +39,7 @@ const Products = () => {
         <input
           className="p-2 border border-gray-300 rounded-md"
           type="text"
-          placeholder="Search by category..."
+          placeholder="Search by product category..."
           value={searchWord}
           onChange={(e) => setSearchWord(e.target.value)}
         />
@@ -55,21 +55,21 @@ const Products = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {searchResult.map((product) => (
             <div
+              onClick={() => handleNavigate(product.id)}
               key={product.id}
-              className="bg-white shadow-lg rounded-lg p-4 max-w-xs mx-auto"
+              className="bg-white shadow-lg rounded-lg p-4 max-w-xs mx-auto cursor-pointer "
             >
               <img
                 src={product.image}
                 alt={product.title}
                 className="w-full h-48 object-cover rounded-lg" // Consistent size
               />
-              <div className="space-y-3">
-                <p className="mt-2 text-lg font-bold">{product.title}</p>
+              <div className="space-y-3 ">
+                <p className="mt-2 text-lg font-bold truncate">
+                  {product.title}
+                </p>
                 <p className="text-gray-500">Category: {product.category}</p>
-                <p
-                  onClick={() => handleNavigate(product.id)}
-                  className="text-sm text-gray-700 truncate cursor-pointer"
-                >
+                <p className="text-sm text-gray-700 truncate">
                   {product.description}
                 </p>
                 <p className="text-green-600 font-bold">${product.price}</p>

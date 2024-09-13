@@ -1,13 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-function Header() {
-  //   const mobileNav = document.querySelector('.mobile-nav');
-  //   const navBtn = document.querySelector('.nav-btn');
+import CartButton from './CartButton';
 
-  //   navBtn.addEventListener('click', () => {
-  //     mobileNav.classList.toggle('hidden');
-  //   });
-
+const Header = ({ cartCount }) => {
   return (
     <>
       <header className="wrapper ">
@@ -30,19 +25,20 @@ function Header() {
             <Link to="/products" className="hover:underline">
               Products
             </Link>
-            <div>{localStorage.length}Show</div>
           </div>
 
-          <div className="space-x-4">
+          <div className="space-x-5 flex items-center">
+            <CartButton cartCount={cartCount} />
             <a
               href="signup"
-              className="bg-yellow-400 hover:bg-yellow-300 p-1 rounded-md "
+              className="bg-white-400 hover:bg-yellow-300 p-1 rounded-md "
             >
               SIGN UP
             </a>
-            <button className="nav-btn bg-yellow-400 hover:bg-yellow-300 p-1 rounded-md md:hidden">
-              MENU
-            </button>
+
+            {/* <button className="nav-btn bg-yellow-400 hover:bg-yellow-300 p-1 rounded-md md:hidden">
+                MENU
+              </button> */}
           </div>
           <div className="mobile-nav top-20 absolute right-0  flex-col space-y-5 hidden ">
             <a href="catalogue" className="hover:underline ">
@@ -62,6 +58,6 @@ function Header() {
       </header>
     </>
   );
-}
+};
 
 export default Header;
