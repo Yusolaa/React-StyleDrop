@@ -62,7 +62,7 @@ const Products = () => {
               <img
                 src={product.image}
                 alt={product.title}
-                className="w-full h-48 object-cover rounded-lg" // Consistent size
+                className="w-full h-48 object-cover rounded-lg"
               />
               <div className="space-y-3 ">
                 <p className="mt-2 text-lg font-bold truncate">
