@@ -3,21 +3,20 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Products = () => {
-  /*Our Error was:
-  We were trying to set the filtered results directly to searchWord, which should instead be used to render the filtered data.
-   */
   const [products, setProducts] = useState([]);
-  const [searchResult, setsearchResult] = useState([]);
-  const [searchWord, setsearchWord] = useState('');
+  const [searchResult, setSearchResult] = useState([]);
+  const [searchWord, setSearchWord] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get('https://dummyjson.com/products');
-      setProducts(res.data.products);
-      console.log(res.data);
-
-      setsearchResult(res.data.products);
+      try {
+        const res = await axios.get('https://fakestoreapi.com/products');
+        setProducts(res.data); // res.data is the array of products
+        setSearchResult(res.data); // Initial search results set to all products
+      } catch (error) {
+        console.error('Error fetching the products:', error);
+      }
     };
     fetchData();
   }, []);
@@ -27,7 +26,7 @@ const Products = () => {
     const filtered = products.filter((product) =>
       product.category.toLowerCase().includes(searchWord.toLowerCase())
     );
-    setsearchResult(filtered);
+    setSearchResult(filtered);
   };
 
   const handleNavigate = (id) => {
@@ -38,14 +37,14 @@ const Products = () => {
     <div className="p-5">
       <div className="mb-10 flex gap-5 justify-center">
         <input
-          className="p-2"
+          className="p-2 border border-gray-300 rounded-md"
           type="text"
           placeholder="Search by category..."
           value={searchWord}
-          onChange={(e) => setsearchWord(e.target.value)}
+          onChange={(e) => setSearchWord(e.target.value)}
         />
         <button
-          className="bg-gray-950 px-2 py-2 rounded-lg text-white"
+          className="bg-gray-950 px-4 py-2 rounded-lg text-white"
           onClick={handleSearch}
         >
           Search
@@ -53,23 +52,31 @@ const Products = () => {
       </div>
 
       {searchResult.length > 0 ? (
-        searchResult.map((product) => (
-          <div
-            key={product.id}
-            className="space-y-1 mt-4 bg-white shadow-lg p-4 max-w-xl"
-          >
-            <p>{product.title}</p>
-            <img src={product.images} alt="Product ....." className="w-32" />
-            <p>{product.price}</p>
-            <p>Category: {product.category}</p>
-            <p
-              onClick={() => handleNavigate(product.id)}
-              className="truncate text-ellipsis"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {searchResult.map((product) => (
+            <div
+              key={product.id}
+              className="bg-white shadow-lg rounded-lg p-4 max-w-xs mx-auto"
             >
-              {product.description}
-            </p>
-          </div>
-        ))
+              <img
+                src={product.image}
+                alt={product.title}
+                className="w-full h-48 object-cover rounded-lg" // Consistent size
+              />
+              <div className="space-y-3">
+                <p className="mt-2 text-lg font-bold">{product.title}</p>
+                <p className="text-gray-500">Category: {product.category}</p>
+                <p
+                  onClick={() => handleNavigate(product.id)}
+                  className="text-sm text-gray-700 truncate cursor-pointer"
+                >
+                  {product.description}
+                </p>
+                <p className="text-green-600 font-bold">${product.price}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       ) : (
         <p>No products found for "{searchWord}"</p>
       )}
