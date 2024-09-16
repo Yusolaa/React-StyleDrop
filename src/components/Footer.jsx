@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../assets/styles/style.css';
 function Footer() {
   return (
@@ -13,9 +14,7 @@ function Footer() {
             <a href="favourite" className="hover:underline">
               Favourite
             </a>
-            <a href="buy" className="hover:underline">
-              Buy
-            </a>
+            <Link to="/DashboardLayout">Dashboard</Link>
             <a href="order" className="hover:underline">
               Order
             </a>

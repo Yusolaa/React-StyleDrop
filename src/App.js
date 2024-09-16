@@ -10,6 +10,11 @@ import { Signup } from './pages/Signup';
 import Products from './pages/Products';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
+import DashboardLayout from './pages/DashboardLayout';
+import Users from './components/Users';
+import CreateProducts from './components/CreateProducts';
+import Settings from './components/Settings';
+import UpdateProduct from './components/UpdateProduct';
 
 const App = () => {
   const [cartCount, setCartCount] = useState(0);
@@ -45,6 +50,12 @@ const App = () => {
             path="/:id"
             element={<ProductDetails updateCartCount={updateCartCount} />}
           />
+          <Route path="dashboardLayout" element={<DashboardLayout />}>
+            <Route path="users" element={<Users />} />
+            <Route path="createProduct" element={<CreateProducts />} />
+            <Route path="updateProduct" element={<UpdateProduct />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
         </Routes>
         <Footer />
       </BrowserRouter>

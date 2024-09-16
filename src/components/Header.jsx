@@ -13,7 +13,7 @@ const Header = ({ cartCount }) => {
               Home
             </Link>
 
-            <a href="catalogue" className="hover:underline">
+            <a href="/catalogue" className="hover:underline">
               Catalogue
             </a>
             <Link to="/about" className="hover:underline">
