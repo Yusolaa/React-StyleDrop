@@ -3,20 +3,31 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Products = ({ products, setProducts }) => {
-  const [searchResult, setSearchResult] = useState(products);
+  const [searchResult, setSearchResult] = useState([]);
   const [searchWord, setSearchWord] = useState('');
   const navigate = useNavigate();
 
+  // Fetch products from API and localStorage
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get('https://fakestoreapi.com/products');
-        setProducts(res.data); // res.data is the array of products
-        setSearchResult(res.data); // Initial search results set to all products
+        const apiProducts = res.data; // API products
+
+        // Retrieve products from localStorage
+        const localProducts =
+          JSON.parse(localStorage.getItem('products')) || [];
+
+        // Combine both localStorage products and API products
+        const combinedProducts = [...localProducts, ...apiProducts];
+
+        setProducts(combinedProducts); // Update the state with combined products
+        setSearchResult(combinedProducts); // Set initial search results
       } catch (error) {
         console.error('Error fetching the products:', error);
       }
     };
+
     if (products.length === 0) fetchData();
   }, [products, setProducts]);
 
@@ -63,7 +74,7 @@ const Products = ({ products, setProducts }) => {
                 alt={product.title}
                 className="w-full h-48 object-cover rounded-lg"
               />
-              <div className="space-y-3 ">
+              <div className="space-y-3">
                 <p className="mt-2 text-lg font-bold truncate">
                   {product.title}
                 </p>
