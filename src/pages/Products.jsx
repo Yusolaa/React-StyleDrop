@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [searchResult, setSearchResult] = useState([]);
+const Products = ({ products, setProducts }) => {
+  const [searchResult, setSearchResult] = useState(products);
   const [searchWord, setSearchWord] = useState('');
   const navigate = useNavigate();
 
@@ -18,8 +17,8 @@ const Products = () => {
         console.error('Error fetching the products:', error);
       }
     };
-    fetchData();
-  }, []);
+    if (products.length === 0) fetchData();
+  }, [products, setProducts]);
 
   // Handle search logic
   const handleSearch = () => {

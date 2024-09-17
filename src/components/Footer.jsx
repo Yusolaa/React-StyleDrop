@@ -14,7 +14,7 @@ function Footer() {
             <a href="favourite" className="hover:underline">
               Favourite
             </a>
-            <Link to="/DashboardLayout">Dashboard</Link>
+            <Link to="/dashboardLayout">Dashboard</Link>
             <a href="order" className="hover:underline">
               Order
             </a>

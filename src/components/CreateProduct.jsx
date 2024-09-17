@@ -1,26 +1,39 @@
 import React, { useState } from 'react';
 
-const CreateProduct = () => {
+const CreateProduct = ({ setProducts }) => {
   const [productName, setProductName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+    setImage(URL.createObjectURL(e.target.files[0]));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform product creation logic here
-    const productData = {
-      productName,
-      price,
+
+    const newProduct = {
+      id: Date.now(),
+      title: productName,
+      price: parseFloat(price),
       description,
       image,
+      category: 'new',
     };
-    console.log(productData);
-    // You can send this data to the server or handle it as needed
+
+    console.log('New Product:', newProduct);
+
+    const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
+    const updatedProducts = [...storedProducts, newProduct];
+    localStorage.setItem('products', JSON.stringify(updatedProducts));
+
+    setProducts(updatedProducts);
+
+    setProductName('');
+    setPrice('');
+    setDescription('');
+    setImage(null);
   };
 
   return (
@@ -37,7 +50,7 @@ const CreateProduct = () => {
                 type="text"
                 value={productName}
                 onChange={(e) => setProductName(e.target.value)}
-                className="w-full p-3 rounded-lg  border-none"
+                className="w-full p-3 rounded-lg border-none"
                 placeholder="Enter product name"
                 required
               />
@@ -48,7 +61,7 @@ const CreateProduct = () => {
                 type="number"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                className="w-full p-3 rounded-lg  border-none"
+                className="w-full p-3 rounded-lg border-none"
                 placeholder="Enter product price"
                 required
               />
@@ -63,7 +76,7 @@ const CreateProduct = () => {
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full p-3 rounded-lgborder-none"
+                  className="w-full p-3 rounded-lg border-none"
                   placeholder="Enter product description"
                   rows="1"
                   required
@@ -84,6 +97,14 @@ const CreateProduct = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="text-center mt-4">
+          <button
+            type="submit"
+            className="bg-white hover:bg-orange-600 font-bold py-2 px-4 rounded-lg"
+          >
+            Create Product
+          </button>
         </div>
       </form>
     </div>
