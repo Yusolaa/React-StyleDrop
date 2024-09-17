@@ -1,6 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -38,7 +38,27 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Header cartCount={cartCount} />
+      <Main
+        cartCount={cartCount}
+        products={products}
+        setProducts={setProducts}
+        updateCartCount={updateCartCount}
+      />
+    </BrowserRouter>
+  );
+};
+
+// Separate component for the main app structure
+const Main = ({ cartCount, products, setProducts, updateCartCount }) => {
+  const location = useLocation();
+
+  // Check if the current route is dashboard-related
+  const isDashboardRoute = location.pathname.startsWith('/dashboardLayout');
+
+  return (
+    <>
+      {/* Only render Header and Footer if not on a dashboard route */}
+      {!isDashboardRoute && <Header cartCount={cartCount} />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -63,8 +83,8 @@ const App = () => {
           <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
-      <Footer />
-    </BrowserRouter>
+      {!isDashboardRoute && <Footer />}
+    </>
   );
 };
 
