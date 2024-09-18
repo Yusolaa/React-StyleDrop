@@ -6,19 +6,18 @@ const Settings = () => {
   const navigate = useNavigate();
 
   const handleDelete = () => {
-    // Get the products array from localStorage
     const productsString = localStorage.getItem('products');
     if (!productsString) {
       alert('No products found in local storage');
-      return; // Exit the function if no products exist
+      return;
     }
 
-    // Parse the products string into an array
     const products = JSON.parse(productsString);
 
-    // Find the index of the product with the given ID
+    const numericProductId = parseInt(productId, 10);
+
     const productIndex = products.findIndex(
-      (product) => product?.id === productId
+      (product) => product?.id === numericProductId
     );
 
     if (productIndex !== -1) {
@@ -28,12 +27,11 @@ const Settings = () => {
       // Update the products array in localStorage
       localStorage.setItem('products', JSON.stringify(products));
 
-      alert('Product deleted successfully from local storage');
+      alert('Product deleted successfully');
 
-      // Optionally, navigate to another page after deletion
-      navigate('/dashboardLayout');
+      navigate('/products');
     } else {
-      alert('Product not found in local storage');
+      alert('Product not found');
     }
   };
 
